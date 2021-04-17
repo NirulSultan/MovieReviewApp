@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MovieReview v2</string>
+    <string name="movie_title">movie_title</string>
+    <string name="movie_rating">Movie Rating</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
