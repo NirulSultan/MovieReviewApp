@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.moviereviewv2.R;
+import com.example.moviereviewv2.Service;
 import com.example.moviereviewv2.adapter.Adapter;
 import com.example.moviereviewv2.modal.Movie;
 import com.google.android.material.navigation.NavigationView;
@@ -66,10 +67,14 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         movieList = new ArrayList<>();
         recyclerView = findViewById(R.id.MovieList);
 
+        Intent serviceIntent = new Intent(this, Service.class);
+        startService(serviceIntent);
+
         GetData getData = new GetData();
         getData.execute();
 
     }
+
 
     public void onBackPressed(){
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
@@ -88,6 +93,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
             case R.id.nav_logout:
                 Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
+                stopService(new Intent(this, Service.class));
                 break;
             case R.id.nav_profile:
                 Toast.makeText(this, "User profile", Toast.LENGTH_SHORT).show();

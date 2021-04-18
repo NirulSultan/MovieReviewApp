@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -106,15 +107,16 @@ public class CreateAccount extends AppCompatActivity {
         }
         //Update Account
         public void onClickUpdateData (View view){
-            String firstname = firstNameEdtTxt.getText().toString();
-            String email = emailEdtTxt.getText().toString();
-
-            Boolean checkUpdateData = DB.updateMember(firstname, email);
-            if (checkUpdateData) {
-                Toast.makeText(CreateAccount.this, "Emailadres updated", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(CreateAccount.this, "Could not update", Toast.LENGTH_SHORT).show();
-            }
+//            String firstname = firstNameEdtTxt.getText().toString();
+//            String email = emailEdtTxt.getText().toString();
+//
+//            Boolean checkUpdateData = DB.updateMember(firstname, email);
+//            if (checkUpdateData) {
+//                Toast.makeText(CreateAccount.this, "Emailadres updated", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(CreateAccount.this, "Could not update", Toast.LENGTH_SHORT).show();
+//            }
+                new updateMemberAsync().execute();
         }
         //View Account Data
         public void onClickViewData (View view){
@@ -139,5 +141,28 @@ public class CreateAccount extends AppCompatActivity {
             builder.setMessage(buffer.toString());
             builder.show();
         }
+
+    private class updateMemberAsync  extends AsyncTask< String, Void, Boolean> {
+        Boolean checkUpdateData;
+        EditText FIRST_NAME = (EditText) findViewById(R.id.firstNameEdtTxt);
+        EditText EMAIL = (EditText) findViewById(R.id.emailEdtTxt);
+        @Override
+        protected Boolean doInBackground(String ... user) {
+            String firstnametxt = FIRST_NAME.getText().toString();
+            String emailtxt = EMAIL.getText().toString();
+            checkUpdateData = DB.updateMember(firstnametxt, emailtxt);
+            return checkUpdateData;
+        }
+        @Override
+        protected void onPostExecute(Boolean checkUpdateData) {
+            if (checkUpdateData ==  true) {
+                Toast toast = Toast.makeText(CreateAccount.this, "Database updated", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                Toast toast = Toast.makeText(CreateAccount.this, "Database not updated", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+    }
 
     }

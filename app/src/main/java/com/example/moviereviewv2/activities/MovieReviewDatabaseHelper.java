@@ -76,8 +76,7 @@ public class MovieReviewDatabaseHelper  extends SQLiteOpenHelper {
             return false;
         }
     }
-
-    //VIEW RECORDS
+    //VIEW RECORD
     public Cursor getData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM NEW_MEMBERS", null);
