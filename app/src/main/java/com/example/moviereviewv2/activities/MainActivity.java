@@ -12,14 +12,14 @@ import android.widget.Toast;
 import com.example.moviereviewv2.R;
 
 public class MainActivity extends AppCompatActivity {
-
+    MovieReviewDatabaseHelper DB;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        DB = new MovieReviewDatabaseHelper(this);
     }
     //Login Button
     public void onClickLogin (View view) {
