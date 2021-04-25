@@ -36,10 +36,11 @@ public class CreateAccount extends AppCompatActivity {
     ArrayList<String> arrayList_countries;
     ArrayAdapter<String> arrayAdapter_countries;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        //DB
+        DB = new MovieReviewDatabaseHelper(this);
         //Text Fields
         firstNameEdtTxt = findViewById(R.id.firstNameEdtTxt);
         lastNameEdtText = findViewById(R.id.lastNameEdtText);

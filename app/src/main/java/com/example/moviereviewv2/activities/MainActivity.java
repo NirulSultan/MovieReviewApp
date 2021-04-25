@@ -32,20 +32,20 @@ public class MainActivity extends AppCompatActivity {
         String notification = "";
 
         if (usernameValue.isEmpty()) {
-            notification = "Vul a.u.b. eerst een gebruikersnaam en wachtwoord in.";
+            notification = "Vul a.u.b. eerst een email en wachtwoord in.";
         } else {
             Boolean checkUserPass = DB.checkCredentials(usernameValue);
             if (checkUserPass) {
                 notification = "Welcome " + usernameValue;
                 loadHomescreenActivity();
             } else {
-                notification = "Username of password niet correct!";
+                notification = "Email of password niet correct!";
             }
         }
         Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
     }
     //Redirect to homescreen after login
-    public void loadHomescreenActivity(String username) {
+    public void loadHomescreenActivity() {
         Intent intent = new Intent(this, HomeScreen.class);
         startActivity(intent);
     }

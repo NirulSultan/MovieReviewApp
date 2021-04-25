@@ -18,6 +18,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.moviereviewv2.R;
 import com.example.moviereviewv2.Service;
 import com.example.moviereviewv2.adapter.Adapter;
+import com.example.moviereviewv2.fragment.HomeFragment;
+import com.example.moviereviewv2.fragment.ProfileFragment;
+import com.example.moviereviewv2.fragment.Settingsfragment;
 import com.example.moviereviewv2.modal.Movie;
 import com.google.android.material.navigation.NavigationView;
 
@@ -101,7 +104,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
 //                 Toast.makeText(this, "User profile", Toast.LENGTH_SHORT).show();
 //                 break;
                 
-                case R.id.nav_home:
+            case R.id.nav_home:
                 PutDataIntoRecyclerView(movieList);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 break;
@@ -109,6 +112,10 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 stopService(new Intent(this, Service.class));
+                break;
+            case R.id.nav_setting:
+                recyclerView.setAdapter(null);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Settingsfragment()).commit();
                 break;
             case R.id.nav_profile:
                 recyclerView.setAdapter(null);

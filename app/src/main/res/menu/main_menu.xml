@@ -11,6 +11,10 @@
             android:title="Profile"
             android:icon="@drawable/username_logo"/>
         <item
+            android:id="@+id/nav_setting"
+            android:title="Settings"
+            android:icon="@drawable/ic_baseline_settings_24"/>
+        <item
             android:id="@+id/nav_logout"
             android:title="Logout"
             android:icon="@drawable/logout_logo"/>
