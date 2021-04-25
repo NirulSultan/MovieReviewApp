@@ -31,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         String notification = "";
 
-        if (usernameValue.isEmpty() || passwordValue.isEmpty()) {
+        if (usernameValue.isEmpty()) {
             notification = "Vul a.u.b. eerst een gebruikersnaam en wachtwoord in.";
-        } else if (usernameValue.equals("Clyde") && passwordValue.equals("1234")) {
-            loadHomescreenActivity(usernameValue);
-            notification = "Welcome Clyde";
         } else {
-            notification = "Username of password niet correct!";
+            Boolean checkUserPass = DB.checkCredentials(usernameValue);
+            if (checkUserPass) {
+                notification = "Welcome " + usernameValue;
+                loadHomescreenActivity();
+            } else {
+                notification = "Username of password niet correct!";
+            }
         }
         Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
     }
