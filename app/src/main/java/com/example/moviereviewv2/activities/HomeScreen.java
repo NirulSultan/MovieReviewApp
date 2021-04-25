@@ -36,6 +36,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class HomeScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    Adapter adapter;
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -66,6 +67,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
 
         movieList = new ArrayList<>();
         recyclerView = findViewById(R.id.MovieList);
+        adapter = new Adapter(this, movieList);
 
         Intent serviceIntent = new Intent(this, Service.class);
         startService(serviceIntent);
@@ -88,15 +90,29 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.nav_home:
+//             case R.id.nav_home:
+//                 break;
+//             case R.id.nav_logout:
+//                 Intent intent = new Intent(this,MainActivity.class);
+//                 startActivity(intent);
+//                 stopService(new Intent(this, Service.class));
+//                 break;
+//             case R.id.nav_profile:
+//                 Toast.makeText(this, "User profile", Toast.LENGTH_SHORT).show();
+//                 break;
+                
+                case R.id.nav_home:
+                PutDataIntoRecyclerView(movieList);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 break;
             case R.id.nav_logout:
-                Intent intent = new Intent(this,MainActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 stopService(new Intent(this, Service.class));
                 break;
             case R.id.nav_profile:
-                Toast.makeText(this, "User profile", Toast.LENGTH_SHORT).show();
+                recyclerView.setAdapter(null);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -171,7 +187,8 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     }
 
     private void PutDataIntoRecyclerView(List<Movie> movieList){
-        Adapter adapter = new Adapter(this, movieList);
+//         Adapter adapter = new Adapter(this, movieList);
+        adapter = new Adapter(this, movieList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
