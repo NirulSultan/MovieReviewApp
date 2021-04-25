@@ -82,6 +82,17 @@ public class MovieReviewDatabaseHelper  extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM NEW_MEMBERS", null);
         return cursor;
     }
+    
+    //CHECK CREDENTIALS
+    public Boolean checkCredentials(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NEW_MEMBERS WHERE EMAIL = ?", new String[]{username});
+        if (cursor.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
